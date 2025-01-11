@@ -60,7 +60,7 @@ if ($items->length > 0) {
         $nodes = [
             'title' => $xpath->query('.//h4', $item),
             'magnitude' => $xpath->query('.//span', $item),
-            'before' => $xpath->query('.//p', $item),
+            'timeago' => $xpath->query('.//p', $item),
         ];
 
 
@@ -76,7 +76,7 @@ if ($items->length > 0) {
             'title' => $titleParts['title'],
             'link' =>  $baseURL . $item->getAttribute('href'),
             'magnitude' =>  $nodes['magnitude']->item(0)->textContent,
-            'before' => $nodes['before']->item(0)->textContent,
+            'timeago' => $nodes['before']->item(0)->textContent,
             'date' =>  $titleParts['date'],
             'time' => $titleParts['time']
         ];

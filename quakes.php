@@ -18,17 +18,21 @@ header("Content-type: application/json; charset=utf-8");
 header('Access-Control-Allow-Origin: *');
 
 
+
+
 /**
  *    WEB SCRAPER STARTS HERE 
  */
 
+
+
 $quakesList = [];
 
+$baseURL  = "https://www.seismos.gr";
+$scrapURL = $baseURL . "/seismoi-lista";
 
-$url = "https://www.seismos.gr/seismoi-lista";
 
-
-$html = file_get_contents($url);
+$html = file_get_contents($scrapURL);
 $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
 if ($html === false) {
@@ -68,10 +72,9 @@ if ($items->length > 0) {
         ];
 
 
-        //apend entire new object to qukeslist
-
         $quakesList[] = [
             'title' => $titleParts['title'],
+            'link' =>  $baseURL . $item->getAttribute('href'),
             'magnitude' =>  $nodes['magnitude']->item(0)->textContent,
             'before' => $nodes['before']->item(0)->textContent,
             'date' =>  $titleParts['date'],
